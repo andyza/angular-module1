@@ -18,12 +18,14 @@ angular.module('LunchCheck', [])
           return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         };
       }
-
-      var lm = $scope.lunchMenu.trim();
+      var lm = "";
+      if (!angular.isUndefined($scope.lunchMenu)){//check if null
+        lm = $scope.lunchMenu.trim();
+      }
       lm=lm.replace(/,,/i, ',');//replace any empty values - 'a,,c' = 'a,c'
       var lunchVal = lm ? lm.split(',') : ""; // it splits the text on comma
       var lunchLen = lunchVal.length;
-
+      console.log("lunchval: "+lunchVal);
       if(lunchLen==0){
           $scope.retVal="Please enter data first";
           $scope.retColor="red";
